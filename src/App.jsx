@@ -126,20 +126,34 @@ function App() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {data[selectedSector].tickers.length > 0 ? (
-                                data[selectedSector].tickers.map((stock) => (
-                                    <div key={stock.ticker} className="flex justify-between items-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
-                                        <div>
-                                            <div className="font-bold text-lg">{STOCK_NAMES[stock.ticker] || stock.ticker}</div>
-                                            <div className="text-sm text-gray-400">{stock.ticker}</div>
-                                        </div>
-                                        <div className="text-right">
-                                            <div className={`font-bold text-lg ${stock.change > 0 ? 'text-red-400' : stock.change < 0 ? 'text-green-400' : 'text-gray-300'}`}>
-                                                {stock.change > 0 ? '+' : ''}{stock.change}%
+                                data[selectedSector].tickers.map((stock) => {
+                                    // Handle legacy data (string only) vs new data (object)
+                                    const isObject = typeof stock === 'object' && stock !== null;
+                                    const ticker = isObject ? stock.ticker : stock;
+                                    const change = isObject ? stock.change : null;
+                                    const price = isObject ? stock.price : null;
+
+                                    return (
+                                        <div key={ticker} className="flex justify-between items-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
+                                            <div>
+                                                <div className="font-bold text-lg">{STOCK_NAMES[ticker] || ticker}</div>
+                                                <div className="text-sm text-gray-400">{ticker}</div>
                                             </div>
-                                            <div className="text-sm text-gray-300">¥{stock.price.toLocaleString()}</div>
+                                            <div className="text-right">
+                                                {price !== null ? (
+                                                    <>
+                                                        <div className={`font-bold text-lg ${change > 0 ? 'text-red-400' : change < 0 ? 'text-green-400' : 'text-gray-300'}`}>
+                                                            {change > 0 ? '+' : ''}{change}%
+                                                        </div>
+                                                        <div className="text-sm text-gray-300">¥{price.toLocaleString()}</div>
+                                                    </>
+                                                ) : (
+                                                    <div className="text-gray-400 text-sm">データ更新待ち</div>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                ))
+                                    );
+                                })
                             ) : (
                                 <p className="col-span-2 text-center text-gray-400 py-8">
                                     データ取得中、またはデータがありません。<br />

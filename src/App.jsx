@@ -108,43 +108,45 @@ function App() {
                 ))}
             </div>
 
-            {/* Detail View (Modal-like section) */}
+            {/* Detail View (Modal Overlay) */}
             {selectedSector && (
-                <div className="max-w-4xl mx-auto animate-fade-in bg-gray-800 rounded-xl border border-gray-700 p-8 shadow-2xl">
-                    <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
-                        <h2 className="text-3xl font-bold text-blue-400">
-                            {data[selectedSector].name} 銘柄一覧
-                        </h2>
-                        <button
-                            onClick={() => setSelectedSector(null)}
-                            className="text-gray-400 hover:text-white text-2xl"
-                        >
-                            ✕
-                        </button>
-                    </div>
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in" onClick={() => setSelectedSector(null)}>
+                    <div className="bg-gray-800 rounded-xl border border-gray-700 p-8 shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+                        <div className="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+                            <h2 className="text-3xl font-bold text-blue-400">
+                                {data[selectedSector].name} 銘柄一覧
+                            </h2>
+                            <button
+                                onClick={() => setSelectedSector(null)}
+                                className="text-gray-400 hover:text-white text-2xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-700 transition-colors"
+                            >
+                                ✕
+                            </button>
+                        </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {data[selectedSector].tickers.length > 0 ? (
-                            data[selectedSector].tickers.map((stock) => (
-                                <div key={stock.ticker} className="flex justify-between items-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
-                                    <div>
-                                        <div className="font-bold text-lg">{STOCK_NAMES[stock.ticker] || stock.ticker}</div>
-                                        <div className="text-sm text-gray-400">{stock.ticker}</div>
-                                    </div>
-                                    <div className="text-right">
-                                        <div className={`font-bold text-lg ${stock.change > 0 ? 'text-red-400' : stock.change < 0 ? 'text-green-400' : 'text-gray-300'}`}>
-                                            {stock.change > 0 ? '+' : ''}{stock.change}%
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {data[selectedSector].tickers.length > 0 ? (
+                                data[selectedSector].tickers.map((stock) => (
+                                    <div key={stock.ticker} className="flex justify-between items-center p-4 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors">
+                                        <div>
+                                            <div className="font-bold text-lg">{STOCK_NAMES[stock.ticker] || stock.ticker}</div>
+                                            <div className="text-sm text-gray-400">{stock.ticker}</div>
                                         </div>
-                                        <div className="text-sm text-gray-300">¥{stock.price.toLocaleString()}</div>
+                                        <div className="text-right">
+                                            <div className={`font-bold text-lg ${stock.change > 0 ? 'text-red-400' : stock.change < 0 ? 'text-green-400' : 'text-gray-300'}`}>
+                                                {stock.change > 0 ? '+' : ''}{stock.change}%
+                                            </div>
+                                            <div className="text-sm text-gray-300">¥{stock.price.toLocaleString()}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p className="col-span-2 text-center text-gray-400 py-8">
-                                データ取得中、またはデータがありません。<br />
-                                (GitHub Actionsの更新をお待ちください)
-                            </p>
-                        )}
+                                ))
+                            ) : (
+                                <p className="col-span-2 text-center text-gray-400 py-8">
+                                    データ取得中、またはデータがありません。<br />
+                                    (GitHub Actionsの更新をお待ちください)
+                                </p>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

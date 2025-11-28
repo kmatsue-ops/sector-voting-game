@@ -3,7 +3,7 @@ name: Daily Stock Data Update
 on:
   schedule:
     # Run at 7:00 UTC (16:00 JST) every day
-    - cron: '0 7 * * *'
+    - cron: '0 7 * * 1-5'
   workflow_dispatch: # Allow manual trigger
 
 jobs:

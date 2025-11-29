@@ -154,7 +154,7 @@ function App() {
                         </h2>
                         <div className="h-[400px] w-full">
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={historyData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                                <LineChart data={historyData} margin={{ top: 10, right: 60, left: 0, bottom: 0 }}>
                                     <CartesianGrid strokeDasharray="3 3" stroke="#333" vertical={false} />
                                     <XAxis
                                         dataKey="date"

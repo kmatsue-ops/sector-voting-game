@@ -41,7 +41,7 @@ function App() {
         const fetchData = async () => {
             try {
                 // Try production path first, then local
-                let res = await fetch('/sector-voting-game/stock_data.json');
+                let res = await fetch('/six-national-strategic/stock_data.json');
                 if (!res.ok) res = await fetch('/stock_data.json');
 
                 const json = await res.json();

@@ -16,20 +16,78 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Check if market is open
+        id: market_check
+        run: |
+          # Get current date in JST
+          CURRENT_DATE=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          DAY_OF_WEEK=$(TZ=Asia/Tokyo date +%u)
+          
+          # Japanese market holidays for 2024-2025 (add more as needed)
+          HOLIDAYS=(
+            "2024-11-23"  # Labor Thanksgiving Day
+            "2024-12-31"  # New Year's Eve (market closed)
+            "2025-01-01"  # New Year's Day
+            "2025-01-02"  # Bank Holiday
+            "2025-01-03"  # Bank Holiday
+            "2025-01-13"  # Coming of Age Day
+            "2025-02-11"  # National Foundation Day
+            "2025-02-23"  # Emperor's Birthday
+            "2025-02-24"  # Emperor's Birthday observed
+            "2025-03-20"  # Vernal Equinox Day
+            "2025-04-29"  # Showa Day
+            "2025-05-03"  # Constitution Day
+            "2025-05-04"  # Greenery Day
+            "2025-05-05"  # Children's Day
+            "2025-05-06"  # Children's Day observed
+            "2025-07-21"  # Marine Day
+            "2025-08-11"  # Mountain Day
+            "2025-09-15"  # Respect for the Aged Day
+            "2025-09-23"  # Autumnal Equinox Day
+            "2025-10-13"  # Sports Day
+            "2025-11-03"  # Culture Day
+            "2025-11-23"  # Labor Thanksgiving Day
+            "2025-11-24"  # Labor Thanksgiving Day observed
+            "2025-12-31"  # New Year's Eve
+          )
+          
+          # Check if weekend
+          if [ "$DAY_OF_WEEK" -ge 6 ]; then
+            echo "Weekend - market closed"
+            echo "market_open=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Check if holiday
+          for holiday in "${HOLIDAYS[@]}"; do
+            if [ "$CURRENT_DATE" = "$holiday" ]; then
+              echo "Holiday ($CURRENT_DATE) - market closed"
+              echo "market_open=false" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+          done
+          
+          echo "Market is open"
+          echo "market_open=true" >> $GITHUB_OUTPUT
+
       - name: Set up Python
+        if: steps.market_check.outputs.market_open == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
       - name: Install dependencies
+        if: steps.market_check.outputs.market_open == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install yfinance pandas
 
       - name: Fetch stock data
+        if: steps.market_check.outputs.market_open == 'true'
         run: python scripts/fetch_stock_data.py
 
       - name: Commit and push changes
+        if: steps.market_check.outputs.market_open == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update stock data"

@@ -37,9 +37,12 @@ def fetch_sector_performance():
     
     print(f"Fetching data at {datetime.now()}...")
 
+    # Fixed start date for data collection
+    START_DATE = "2024-11-26"
+    
     # Initialize common date index (using a major index like 9984.T as reference)
     ref_ticker = "9984.T"
-    ref_data = yf.Ticker(ref_ticker).history(period="1y")
+    ref_data = yf.Ticker(ref_ticker).history(start=START_DATE)
     common_dates = ref_data.index
     
     # Structure to hold sum of normalized prices for averaging
@@ -53,9 +56,9 @@ def fetch_sector_performance():
         
         for ticker in tickers:
             try:
-                # Fetch data for last 1 year
+                # Fetch data from fixed start date
                 stock = yf.Ticker(ticker)
-                hist = stock.history(period="1y")
+                hist = stock.history(start=START_DATE)
                 
                 if len(hist) < 2:
                     print(f"  Warning: Insufficient data for {ticker}")
@@ -124,7 +127,11 @@ def fetch_sector_performance():
                 entry[sector] = 0 # Or null
         history_data.append(entry)
 
-    return {"sectors": results, "history": history_data}
+    return {
+        "sectors": results, 
+        "history": history_data,
+        "last_updated": datetime.now().isoformat()
+    }
 
 if __name__ == "__main__":
     data = fetch_sector_performance()

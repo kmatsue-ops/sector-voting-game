@@ -36,6 +36,7 @@ function App() {
     const [data, setData] = useState(INITIAL_DATA);
     const [historyData, setHistoryData] = useState([]);
     const [selectedSector, setSelectedSector] = useState(null);
+    const [lastUpdated, setLastUpdated] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,6 +61,9 @@ function App() {
                 if (json.history) {
                     setHistoryData(json.history);
                 }
+                if (json.last_updated) {
+                    setLastUpdated(new Date(json.last_updated).toLocaleString('ja-JP'));
+                }
             } catch (err) {
                 console.error("Failed to load stock data", err);
             }
@@ -80,16 +84,15 @@ function App() {
                         <p className="text-gray-400 mt-2 font-medium">国家戦略6分野 株価トラッカー</p>
                     </div>
                     <div className="mt-4 md:mt-0 px-4 py-2 bg-white/5 rounded-full border border-white/10 backdrop-blur-sm text-sm text-gray-300">
-                        最終更新: {new Date().toLocaleDateString()}
+                        最終更新: {lastUpdated || '読み込み中...'}
                     </div>
                 </header>
 
                 {/* Main Bento Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {Object.entries(data).map(([key, info]) => {
-                        // Calculate change since Tax Cut News (3 days ago)
-                        const newsDate = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
-                        const newsDateStr = newsDate.toISOString().split('T')[0];
+                        // Calculate change since Tax Cut News (fixed: 2025-11-26)
+                        const newsDateStr = "2025-11-26";
 
                         // Find closest data point to news date
                         const newsDataPoint = historyData.find(d => d.date >= newsDateStr) || historyData[historyData.length - 1];
@@ -175,7 +178,7 @@ function App() {
                                         labelFormatter={(label) => new Date(label).toLocaleDateString()}
                                     />
                                     <Legend iconType="circle" wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
-                                    <ReferenceLine x={new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]} stroke="#ef4444" strokeDasharray="3 3" label={{ value: '減税報道', fill: '#ef4444', fontSize: 12, position: 'top' }} />
+                                    <ReferenceLine x="2025-11-26" stroke="#ef4444" strokeDasharray="3 3" label={{ value: '減税報道', fill: '#ef4444', fontSize: 12, position: 'top' }} />
 
                                     <Line type="monotone" dataKey="AI_Robot" stroke="#3b82f6" strokeWidth={2} dot={false} name="AI" />
                                     <Line type="monotone" dataKey="Quantum" stroke="#8b5cf6" strokeWidth={2} dot={false} name="量子" />

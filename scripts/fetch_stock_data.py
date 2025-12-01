@@ -62,26 +62,39 @@ def fetch_sector_performance():
         
         for ticker in tickers:
             try:
-                # Fetch data from fixed start date
-                stock = yf.Ticker(ticker)
-                hist = stock.history(start=START_DATE)
+                # Initialize empty history
+                hist = pd.DataFrame()
                 
+                # Try fetching data for the current (new) ticker
+                try:
+                    stock = yf.Ticker(ticker)
+                    hist = stock.history(start=START_DATE)
+                except Exception as e:
+                    print(f"  Note: Could not fetch data for {ticker} ({e}). Checking for merge...")
+
                 # Handle merged tickers (e.g. QPS 5595.T -> 464A.T)
                 if ticker in MERGE_TICKERS:
                     old_ticker = MERGE_TICKERS[ticker]
                     print(f"  Merging data for {ticker} with old ticker {old_ticker}...")
-                    old_stock = yf.Ticker(old_ticker)
-                    old_hist = old_stock.history(start=START_DATE)
-                    
-                    # Combine old and new history
-                    # Use combine_first or concat. Concat is safer if dates don't overlap much.
-                    # If dates overlap, we prefer the new ticker's data? Or just drop duplicates.
-                    hist = pd.concat([old_hist, hist])
-                    hist = hist[~hist.index.duplicated(keep='last')] # Keep last (newest) entry for same date
-                    hist = hist.sort_index()
+                    try:
+                        old_stock = yf.Ticker(old_ticker)
+                        old_hist = old_stock.history(start=START_DATE)
+                        
+                        if not old_hist.empty:
+                            # Combine old and new history
+                            if hist.empty:
+                                hist = old_hist
+                            else:
+                                hist = pd.concat([old_hist, hist])
+                                hist = hist[~hist.index.duplicated(keep='last')] # Keep last (newest) entry
+                                hist = hist.sort_index()
+                        else:
+                            print(f"  Warning: Old ticker {old_ticker} returned no data.")
+                    except Exception as e:
+                        print(f"  Error fetching old ticker {old_ticker}: {e}")
                 
-                if len(hist) < 2:
-                    print(f"  Warning: Insufficient data for {ticker}")
+                if hist.empty or len(hist) < 2:
+                    print(f"  Warning: Insufficient data for {ticker} (Rows: {len(hist)})")
                     continue
                 
                 # Reindex to common dates to handle missing days/listings

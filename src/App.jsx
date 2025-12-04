@@ -133,7 +133,7 @@ function App() {
                         <h1 className="text-4xl md:text-6xl font-black tracking-tighter cyber-glitch" data-text="JAPAN TECH 6">
                             JAPAN TECH 6
                         </h1>
-                        <p className="text-green-600 mt-2 font-bold tracking-widest uppercase text-xs">>> National Strategic Sectors Tracker v2.0</p>
+                        <p className="text-green-600 mt-2 font-bold tracking-widest uppercase text-xs">&gt;&gt; National Strategic Sectors Tracker v2.0</p>
                         {nikkeiPrice && (
                             <div className="mt-4 flex items-center gap-4 text-sm font-bold font-mono">
                                 <span className="px-3 py-1 bg-red-900/20 text-red-500 border border-red-500/50">NIKKEI 225</span>
@@ -199,7 +199,7 @@ function App() {
                                         {info.name}
                                     </h3>
                                     <div className="w-full h-[1px] bg-green-900 my-3 group-hover:bg-green-500 transition-colors"></div>
-                                    <p className="text-xs text-green-600 group-hover:text-green-400">>> ACCESS DATA</p>
+                                    <p className="text-xs text-green-600 group-hover:text-green-400">&gt;&gt; ACCESS DATA</p>
                                 </div>
                             </button>
                         );
@@ -219,8 +219,8 @@ function App() {
                                     key={range}
                                     onClick={() => setTimeRange(range)}
                                     className={`px-3 py-1 text-xs font-bold border ${timeRange === range
-                                            ? 'bg-green-500 text-black border-green-500'
-                                            : 'bg-transparent text-green-700 border-green-900 hover:text-green-400 hover:border-green-500'
+                                        ? 'bg-green-500 text-black border-green-500'
+                                        : 'bg-transparent text-green-700 border-green-900 hover:text-green-400 hover:border-green-500'
                                         }`}
                                 >
                                     {range}
@@ -289,7 +289,7 @@ function App() {
                                 </span>
                                 <div>
                                     <h2 className="text-2xl font-black text-green-400 uppercase tracking-widest">{data[selectedSector].name}</h2>
-                                    <p className="text-green-700 text-xs font-mono">>> SECTOR COMPOSITION DATA</p>
+                                    <p className="text-green-700 text-xs font-mono">&gt;&gt; SECTOR COMPOSITION DATA</p>
                                 </div>
                             </div>
                             <button

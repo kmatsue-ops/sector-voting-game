@@ -19,7 +19,8 @@
   }
 
   .cyber-card:hover {
-    @apply border-green-400 shadow-[0_0_20px_rgba(0, 255, 0, 0.3)];
+    @apply border-green-400;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
     transform: translateY(-2px);
   }
 
@@ -39,7 +40,12 @@
   }
 
   .cyber-button {
-    @apply px-6 py-2 bg-black border border-green-500 text-green-500 font-bold uppercase tracking-widest transition-all duration-300 hover:bg-green-500 hover:text-black hover:shadow-[0_0_20px_rgba(0, 255, 0, 0.5)];
+    @apply px-6 py-2 bg-black border border-green-500 text-green-500 font-bold uppercase tracking-widest transition-all duration-300;
+  }
+
+  .cyber-button:hover {
+    @apply bg-green-500 text-black;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
   }
 }
 

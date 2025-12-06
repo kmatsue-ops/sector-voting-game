@@ -38,6 +38,7 @@ function App() {
     const [selectedSector, setSelectedSector] = useState(null);
     const [lastUpdated, setLastUpdated] = useState('');
     const [nikkeiPrice, setNikkeiPrice] = useState(null);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,6 +77,15 @@ function App() {
         fetchData();
     }, []);
 
+    // Track mouse position for cursor effect
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setMousePos({ x: e.clientX, y: e.clientY });
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
     // Calculate Nikkei change since Tax Cut News
     const getNikkeiChange = () => {
         if (!historyData.length) return null;
@@ -95,6 +105,15 @@ function App() {
 
     return (
         <div className="min-h-screen text-white p-4 md:p-8 font-sans selection:bg-blue-500 selection:text-white relative overflow-hidden">
+            {/* ===== CURSOR FOLLOWER ===== */}
+            <div
+                className="cursor-follower"
+                style={{
+                    left: `${mousePos.x}px`,
+                    top: `${mousePos.y}px`,
+                }}
+            />
+
             {/* ===== ANIMATED BACKGROUND EFFECTS ===== */}
             {/* Floating Particles */}
             <div className="particles-container">

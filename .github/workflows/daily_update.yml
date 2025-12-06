@@ -114,9 +114,36 @@ jobs:
         if: steps.market_check.outputs.market_open == 'true'
         run: npm install
 
-      - name: Build
+      - name: Build main site
         if: steps.market_check.outputs.market_open == 'true'
         run: npm run build
+
+      # === NEW: Build preview from New-IDEA branch ===
+      - name: Checkout New-IDEA branch for preview
+        if: steps.market_check.outputs.market_open == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: New-IDEA
+          path: preview-branch
+
+      - name: Install preview dependencies
+        if: steps.market_check.outputs.market_open == 'true'
+        working-directory: ./preview-branch
+        run: npm install
+
+      - name: Build preview site
+        if: steps.market_check.outputs.market_open == 'true'
+        working-directory: ./preview-branch
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /six-national-strategic/preview/
+
+      - name: Copy preview to main dist
+        if: steps.market_check.outputs.market_open == 'true'
+        run: |
+          mkdir -p ./dist/preview
+          cp -r ./preview-branch/dist/* ./dist/preview/
+      # === END: Build preview ===
 
       - name: Upload artifact
         if: steps.market_check.outputs.market_open == 'true'

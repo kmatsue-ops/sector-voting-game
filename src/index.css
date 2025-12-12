@@ -11,34 +11,58 @@
 
 @layer components {
 
-  /* ===== LOGO SLIDER (Diagonal) ===== */
-  .logo-slider-container {
+  /* ===== VERTICAL LOGO COLUMNS ===== */
+  .logo-column {
     position: fixed;
-    inset: 0;
+    top: 0;
+    bottom: 0;
+    width: 120px;
     overflow: hidden;
     pointer-events: none;
     z-index: 0;
   }
 
-  .logo-slider {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 60px;
-    animation: logo-scroll-diagonal 80s linear infinite;
-    white-space: nowrap;
-    position: absolute;
-    top: 50%;
-    left: -50%;
+  .logo-column-left {
+    left: 0;
   }
 
-  .logo-item {
-    flex-shrink: 0;
-    font-size: 3rem;
-    font-weight: 900;
-    letter-spacing: 0.02em;
-    opacity: 0.15;
-    text-shadow: 0 0 30px currentColor;
-    font-family: 'Noto Sans JP', 'Inter', sans-serif;
+  .logo-column-right {
+    right: 0;
+  }
+
+  .logo-scroll {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .logo-scroll-down {
+    animation: scroll-down 60s linear infinite;
+  }
+
+  .logo-scroll-up {
+    animation: scroll-up 60s linear infinite;
+  }
+
+  .logo-item-vertical {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .company-logo {
+    width: 80px;
+    height: auto;
+    opacity: 0.3;
+    filter: grayscale(100%) brightness(1.5);
+    transition: all 0.3s ease;
+  }
+
+  .company-logo:hover {
+    opacity: 0.6;
+    filter: grayscale(0%) brightness(1);
   }
 
   /* ===== GRID OVERLAY ===== */
@@ -171,13 +195,23 @@
   }
 }
 
-@keyframes logo-scroll-diagonal {
+@keyframes scroll-down {
   0% {
-    transform: translate(0, 0);
+    transform: translateY(-33.33%);
   }
 
   100% {
-    transform: translate(-50%, -100px);
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-33.33%);
   }
 }
 

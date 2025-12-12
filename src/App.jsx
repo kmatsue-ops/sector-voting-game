@@ -32,66 +32,69 @@ const INITIAL_DATA = {
     "Space": { name: "宇宙", change: 0, tickers: [] }
 };
 
-// 6分野 大型株 30社 (各分野の上位5社)
-const LARGE_CAP_STOCKS = [
+// 6分野 大型株 (ロゴ取得可能な企業)
+// Clearbit Logo API: https://logo.clearbit.com/{domain}
+const LARGE_CAP_LOGOS = [
     // AI・ロボット
-    { name: "ソフトバンクG", sector: "AI" },
-    { name: "キーエンス", sector: "AI" },
-    { name: "ファナック", sector: "AI" },
-    { name: "SMC", sector: "AI" },
-    { name: "オムロン", sector: "AI" },
+    { name: "ソフトバンク", domain: "softbank.co.jp" },
+    { name: "キーエンス", domain: "keyence.co.jp" },
+    { name: "ファナック", domain: "fanuc.co.jp" },
+    { name: "オムロン", domain: "omron.co.jp" },
     // 量子技術
-    { name: "富士通", sector: "Quantum" },
-    { name: "NEC", sector: "Quantum" },
-    { name: "NTT", sector: "Quantum" },
-    { name: "日立製作所", sector: "Quantum" },
-    { name: "三菱電機", sector: "Quantum" },
+    { name: "富士通", domain: "fujitsu.com" },
+    { name: "NEC", domain: "nec.com" },
+    { name: "NTT", domain: "ntt.com" },
+    { name: "日立", domain: "hitachi.com" },
     // 半導体・通信
-    { name: "東京エレクトロン", sector: "Semi" },
-    { name: "アドバンテスト", sector: "Semi" },
-    { name: "信越化学", sector: "Semi" },
-    { name: "ディスコ", sector: "Semi" },
-    { name: "レーザーテック", sector: "Semi" },
+    { name: "信越化学", domain: "shinetsu.co.jp" },
+    { name: "KDDI", domain: "kddi.com" },
     // バイオ・ヘルスケア
-    { name: "中外製薬", sector: "Bio" },
-    { name: "第一三共", sector: "Bio" },
-    { name: "武田薬品", sector: "Bio" },
-    { name: "大塚HD", sector: "Bio" },
-    { name: "アステラス製薬", sector: "Bio" },
-    // 核融合
-    { name: "IHI", sector: "Fusion" },
-    { name: "住友電工", sector: "Fusion" },
-    { name: "フジクラ", sector: "Fusion" },
-    { name: "古河電工", sector: "Fusion" },
-    { name: "日揮HD", sector: "Fusion" },
-    // 宇宙
-    { name: "三菱重工", sector: "Space" },
-    { name: "川崎重工", sector: "Space" },
-    { name: "スカパーJSAT", sector: "Space" },
-    { name: "キヤノン", sector: "Space" },
-    { name: "KDDI", sector: "Space" }
+    { name: "武田薬品", domain: "takeda.com" },
+    { name: "アステラス", domain: "astellas.com" },
+    // 核融合・宇宙
+    { name: "三菱重工", domain: "mhi.com" },
+    { name: "川崎重工", domain: "khi.co.jp" },
+    { name: "キヤノン", domain: "canon.com" },
+    { name: "IHI", domain: "ihi.co.jp" }
 ];
 
-// セクター別カラー
-const SECTOR_COLORS = {
-    AI: "#3b82f6",      // Blue
-    Quantum: "#8b5cf6", // Purple
-    Semi: "#10b981",    // Green
-    Bio: "#ec4899",     // Pink
-    Fusion: "#f59e0b",  // Orange
-    Space: "#9ca3af"    // Gray
-};
-
-function LogoSlider() {
-    // Duplicate array for seamless loop
-    const stocks = [...LARGE_CAP_STOCKS, ...LARGE_CAP_STOCKS, ...LARGE_CAP_STOCKS];
+// 左側のロゴ（下に流れる）
+function LeftLogoSlider() {
+    const logos = [...LARGE_CAP_LOGOS, ...LARGE_CAP_LOGOS, ...LARGE_CAP_LOGOS];
 
     return (
-        <div className="logo-slider-container">
-            <div className="logo-slider">
-                {stocks.map((stock, i) => (
-                    <div key={i} className="logo-item" style={{ color: SECTOR_COLORS[stock.sector] }}>
-                        {stock.name}
+        <div className="logo-column logo-column-left">
+            <div className="logo-scroll logo-scroll-down">
+                {logos.map((company, i) => (
+                    <div key={i} className="logo-item-vertical">
+                        <img
+                            src={`https://logo.clearbit.com/${company.domain}`}
+                            alt={company.name}
+                            className="company-logo"
+                            onError={(e) => { e.target.style.display = 'none'; }}
+                        />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// 右側のロゴ（上に流れる）
+function RightLogoSlider() {
+    const logos = [...LARGE_CAP_LOGOS, ...LARGE_CAP_LOGOS, ...LARGE_CAP_LOGOS].reverse();
+
+    return (
+        <div className="logo-column logo-column-right">
+            <div className="logo-scroll logo-scroll-up">
+                {logos.map((company, i) => (
+                    <div key={i} className="logo-item-vertical">
+                        <img
+                            src={`https://logo.clearbit.com/${company.domain}`}
+                            alt={company.name}
+                            className="company-logo"
+                            onError={(e) => { e.target.style.display = 'none'; }}
+                        />
                     </div>
                 ))}
             </div>
@@ -166,8 +169,9 @@ function App() {
             {/* Grid Overlay */}
             <div className="grid-overlay" />
 
-            {/* Logo Slider Background */}
-            <LogoSlider />
+            {/* Logo Sliders - Left and Right Columns */}
+            <LeftLogoSlider />
+            <RightLogoSlider />
 
             <div className="max-w-7xl mx-auto space-y-8 relative z-10">
 

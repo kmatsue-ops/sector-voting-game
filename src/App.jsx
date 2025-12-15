@@ -32,11 +32,11 @@ const INITIAL_DATA = {
     "Space": { name: "宇宙", change: 0, tickers: [] }
 };
 
-// 6分野 大型株 (Data with Custom URLs)
+// 6分野 大型株 (Data with Verified Custom URLs)
 const LARGE_CAP_LOGOS = [
     // AI・ロボット - Blue (#3b82f6)
     { name: "ソフトバンクG", slug: "softbank", wvl: "softbank", color: "#3b82f6" },
-    { name: "キーエンス", slug: "keyence", wvl: "keyence", customUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Keyence_logo.svg", color: "#3b82f6" },
+    { name: "キーエンス", slug: "keyence", customUrl: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Keyence_logo.svg", color: "#3b82f6" },
     { name: "ファナック", slug: "fanuc", wvl: "fanuc", color: "#3b82f6" },
     { name: "SMC", slug: "smc", wvl: "smc-1", color: "#3b82f6" },
     { name: "オムロン", slug: "omron", wvl: "omron", color: "#3b82f6" },
@@ -50,8 +50,8 @@ const LARGE_CAP_LOGOS = [
     { name: "東京エレクトロン", slug: "tokyoelectron", wvl: "tokyo-electron", color: "#10b981" },
     { name: "アドバンテスト", slug: "advantest", wvl: "advantest", color: "#10b981" },
     { name: "信越化学", slug: "shinetsachemical", wvl: "shin-etsu", color: "#10b981" },
-    { name: "ディスコ", slug: "disco", customUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Disco_Corporation_logo.svg", color: "#10b981" },
-    { name: "レーザーテック", slug: "lasertec", customUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Lasertec_Logo.svg", color: "#10b981" },
+    { name: "ディスコ", slug: "disco", customUrl: "https://www.disco.co.jp/jp/news/kit_mirror/images/logo_rgb.jpg", color: "#10b981" }, // SVGなしのため公式jpg利用(例外)
+    { name: "レーザーテック", slug: "lasertec", customUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Lasertec_Logo.svg", color: "#10b981" },
     // バイオ・ヘルスケア - Pink (#ec4899)
     { name: "中外製薬", slug: "chugaipharmaceutical", wvl: "chugai-pharmaceutical", color: "#ec4899" },
     { name: "第一三共", slug: "daiichisankyo", wvl: "daiichi-sankyo", color: "#ec4899" },
@@ -60,15 +60,15 @@ const LARGE_CAP_LOGOS = [
     { name: "アステラス製薬", slug: "astellas", wvl: "astellas-pharma", color: "#ec4899" },
     // 核融合 - Orange (#f59e0b)
     { name: "IHI", slug: "ihi", wvl: "ihi-corporation", color: "#f59e0b" },
-    { name: "住友電気工業", slug: "sumitomo", wvl: "sumitomo-electric-industries", color: "#f59e0b" },
-    { name: "フジクラ", slug: "fujikura", customUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Fujikura.svg", color: "#f59e0b" },
-    { name: "古河電気工業", slug: "furukawa", customUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/Furukawa_Electric_logo.svg", color: "#f59e0b" },
+    { name: "住友電気工業", slug: "sumitomo", customUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Sumitomo_Electric_Industries_logo.svg", color: "#f59e0b" },
+    { name: "フジクラ", slug: "fujikura", customUrl: "https://upload.wikimedia.org/wikipedia/commons/e/ea/Fujikura.svg", color: "#f59e0b" },
+    { name: "古河電気工業", slug: "furukawa", customUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Furukawa_Electric_en_logo.svg", color: "#f59e0b" },
     { name: "日揮HD", slug: "jgc", wvl: "jgc", color: "#f59e0b" },
     // 宇宙 - Gray (#9ca3af)
     { name: "三菱重工業", slug: "mitsubishiheavyindustries", wvl: "mitsubishi-heavy-industries", color: "#9ca3af" },
     { name: "川崎重工業", slug: "kawasaki", wvl: "kawasaki", color: "#9ca3af" },
-    { name: "スカパーJSAT", slug: "skyperfectjsat", customUrl: "https://commons.wikimedia.org/wiki/Special:FilePath/SKY_Perfect_JSAT_Group_logo.svg", color: "#9ca3af" },
-    { name: "キヤノン", slug: "canon", wvl: "canon", color: "#9ca3af" },
+    { name: "スカパーJSAT", slug: "skyperfectjsat", customUrl: "https://upload.wikimedia.org/wikipedia/commons/2/23/SKY_Perfect_JSAT_Group_logo.svg", color: "#9ca3af" },
+    { name: "キヤノン", slug: "canon", wvl: "canon", customUrl: "https://cdn.worldvectorlogo.com/logos/canon.svg", color: "#9ca3af" },
     { name: "KDDI", slug: "kddi", wvl: "kddi", color: "#9ca3af" }
 ];
 

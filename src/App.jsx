@@ -33,58 +33,58 @@ const INITIAL_DATA = {
 };
 
 // 6分野 大型株 (Data with Verified Custom URLs)
+// 6分野 大型株 (Data with Verified Custom URLs)
 const LARGE_CAP_LOGOS = [
     // AI・ロボット - Blue (#3b82f6)
-    { name: "ソフトバンクG", slug: "softbank", wvl: "softbank", color: "#3b82f6" },
-    { name: "キーエンス", slug: "keyence", customUrl: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Keyence_logo.svg", color: "#3b82f6" },
-    { name: "ファナック", slug: "fanuc", customUrl: "https://upload.wikimedia.org/wikipedia/commons/4/46/Fanuc_logo.svg", color: "#3b82f6" },
-    { name: "SMC", slug: "smc", customUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d3/SMC_Corporation_logo.svg", color: "#3b82f6" },
-    { name: "オムロン", slug: "omron", customUrl: "https://upload.wikimedia.org/wikipedia/commons/1/18/Omron_logo.svg", color: "#3b82f6" },
+    { name: "ソフトバンクG", slug: "softbank", localFile: "softbank.svg", color: "#3b82f6" }, // Boost brightness removed
+    { name: "キーエンス", slug: "keyence", localFile: "keyence.svg", color: "#3b82f6" },
+    { name: "ファナック", slug: "fanuc", localFile: "fanuc.svg", color: "#3b82f6" },
+    { name: "SMC", slug: "smc", localFile: "smc.svg", color: "#3b82f6" },
+    { name: "オムロン", slug: "omron", localFile: "omron.svg", color: "#3b82f6" },
     // 量子技術 - Purple (#8b5cf6)
-    { name: "富士通", slug: "fujitsu", customUrl: "https://upload.wikimedia.org/wikipedia/commons/9/90/Fujitsu-Logo.svg", color: "#8b5cf6" },
-    { name: "NEC", slug: "nec", wvl: "nec", color: "#8b5cf6" },
-    { name: "NTT", slug: "nippontelegraphandtelephone", wvl: "nippon-telegraph-and-telephone", color: "#8b5cf6" },
-    { name: "日立製作所", slug: "hitachi", wvl: "hitachi", color: "#8b5cf6" },
-    { name: "三菱電機", slug: "mitsubishielectric", wvl: "mitsubishi-electric", color: "#8b5cf6" },
+    { name: "富士通", slug: "fujitsu", localFile: "fujitsu.svg", color: "#8b5cf6" },
+    { name: "NEC", slug: "nec", localFile: "nec.svg", color: "#8b5cf6" },
+    { name: "NTT", slug: "ntt", localFile: "ntt.svg", color: "#8b5cf6" },
+    { name: "日立製作所", slug: "hitachi", localFile: "hitachi.svg", color: "#8b5cf6", sizeMultiplier: 1.5 },
+    { name: "三菱電機", slug: "mitsubishielectric", localFile: "mitsubishielectric.svg", color: "#8b5cf6" },
     // 半導体・通信 - Green (#10b981)
-    { name: "東京エレクトロン", slug: "tokyoelectron", wvl: "tokyo-electron", color: "#10b981" },
-    { name: "アドバンテスト", slug: "advantest", wvl: "advantest", color: "#10b981" },
-    { name: "信越化学", slug: "shinetsachemical", wvl: "shin-etsu", color: "#10b981" },
-    { name: "ディスコ", slug: "disco", customUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Disco_Corporation_logo.svg", color: "#10b981" },
-    { name: "レーザーテック", slug: "lasertec", customUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Lasertec_Logo.svg", color: "#10b981" },
+    { name: "東京エレクトロン", slug: "tokyoelectron", localFile: "tokyoelectron.svg", color: "#10b981" },
+    { name: "アドバンテスト", slug: "advantest", localFile: "advantest.svg", color: "#10b981", sizeMultiplier: 1.5 },
+    { name: "信越化学", slug: "shinetsachemical", localFile: "shinetsu.svg", color: "#10b981" },
+    { name: "ディスコ", slug: "disco", localFile: "disco.svg", color: "#10b981" },
+    { name: "レーザーテック", slug: "lasertec", localFile: "lasertec.svg", color: "#10b981" },
     // バイオ・ヘルスケア - Pink (#ec4899)
-    { name: "中外製薬", slug: "chugaipharmaceutical", wvl: "chugai-pharmaceutical", color: "#ec4899" },
-    { name: "第一三共", slug: "daiichisankyo", wvl: "daiichi-sankyo", color: "#ec4899" },
-    { name: "武田薬品", slug: "takeda", wvl: "takeda-pharmaceuticals", color: "#ec4899" },
-    { name: "大塚HD", slug: "otsuka", wvl: "otsuka-pharmaceutical-company", color: "#ec4899" },
-    { name: "アステラス製薬", slug: "astellas", wvl: "astellas-pharma", color: "#ec4899" },
+    { name: "中外製薬", slug: "chugaipharmaceutical", localFile: "chugai.svg", color: "#ec4899" },
+    { name: "第一三共", slug: "daiichisankyo", localFile: "daiichisankyo.svg", color: "#ec4899", sizeMultiplier: 1.3 }, // Give extra size as requested
+    { name: "武田薬品", slug: "takeda", localFile: "takeda.svg", color: "#ec4899" },
+    { name: "大塚HD", slug: "otsuka", localFile: "otsuka.svg", color: "#ec4899" },
+    { name: "アステラス製薬", slug: "astellas", localFile: "astellas.svg", color: "#ec4899" },
     // 核融合 - Orange (#f59e0b)
-    { name: "IHI", slug: "ihi", customUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a2/IHI_logo.svg", color: "#f59e0b" },
-    { name: "住友電気工業", slug: "sumitomo", customUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Sumitomo_Electric_Industries_logo.svg", color: "#f59e0b" },
-    { name: "フジクラ", slug: "fujikura", customUrl: "https://upload.wikimedia.org/wikipedia/commons/e/ea/Fujikura.svg", color: "#f59e0b" },
-    { name: "古河電気工業", slug: "furukawa", customUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Furukawa_Electric_en_logo.svg", color: "#f59e0b" },
-    { name: "日揮HD", slug: "jgc", wvl: "jgc", color: "#f59e0b" },
+    { name: "IHI", slug: "ihi", localFile: "ihi.svg", color: "#f59e0b" },
+    { name: "住友電気工業", slug: "sumitomo", localFile: "sumitomo.svg", color: "#f59e0b", sizeMultiplier: 1.5 },
+    { name: "フジクラ", slug: "fujikura", localFile: "fujikura.svg", color: "#f59e0b" },
+    { name: "古河電気工業", slug: "furukawa", localFile: "furukawa.svg", color: "#f59e0b", sizeMultiplier: 1.5 },
+    { name: "日揮HD", slug: "jgc", localFile: "jgc.svg", color: "#f59e0b", sizeMultiplier: 0.7 },
     // 宇宙 - Gray (#9ca3af)
-    { name: "三菱重工業", slug: "mitsubishiheavyindustries", customUrl: "https://upload.wikimedia.org/wikipedia/commons/2/27/Mitsubishi_Heavy_Industries_logo.svg", color: "#9ca3af" },
-    { name: "川崎重工業", slug: "kawasaki", customUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Kawasaki_Heavy_Industries_logo.svg", color: "#9ca3af" },
-    { name: "スカパーJSAT", slug: "skyperfectjsat", customUrl: "https://upload.wikimedia.org/wikipedia/commons/2/23/SKY_Perfect_JSAT_Group_logo.svg", color: "#9ca3af" },
-    { name: "キヤノン", slug: "canon", customUrl: "https://upload.wikimedia.org/wikipedia/commons/2/22/Canon_logo_2017.svg", color: "#9ca3af" },
-    { name: "KDDI", slug: "kddi", customUrl: "https://upload.wikimedia.org/wikipedia/commons/b/ba/KDDI_logo.svg", color: "#9ca3af" }
+    { name: "三菱重工業", slug: "mitsubishiheavyindustries", localFile: "mitsubishiheavy.svg", color: "#9ca3af" },
+    { name: "川崎重工業", slug: "kawasaki", localFile: "kawasaki.svg", color: "#9ca3af" },
+    { name: "スカパーJSAT", slug: "skyperfectjsat", localFile: "skyperfectjsat.svg", color: "#9ca3af" }, // Service logo
+    { name: "キヤノン", slug: "canon", localFile: "canon.svg", color: "#CC0000" }, // Official Red
+    { name: "KDDI", slug: "kddi", localFile: "kddi.svg", color: "#9ca3af" }
 ];
 
 // ロゴアイテムコンポーネント - Custom URL -> WorldVectorLogo -> Simple Icons -> テキスト
 function LogoItem({ company }) {
     const [imgError, setImgError] = React.useState(false);
 
-    // 優先順位: Custom URL -> WorldVectorLogo -> Simple Icons
-    let logoUrl = null;
-    if (company.customUrl) {
-        logoUrl = company.customUrl;
-    } else if (company.wvl) {
-        logoUrl = `https://cdn.worldvectorlogo.com/logos/${company.wvl}.svg`;
-    } else if (company.slug) {
-        logoUrl = `https://cdn.simpleicons.org/${company.slug}/${company.color.replace('#', '')}`;
-    }
+    // Local file path (with base path handling for GitHub Pages)
+    // Production: /six-national-strategic/logos/xxx.svg
+    // Dev/Preview: /six-national-strategic/preview/logos/xxx.svg (Handled by relative or absolute)
+    // Here we use a safe relative approach or absolute based on known deployment.
+    // For GitHub Pages User/Project site: /project-name/logos/...
+    const logoUrl = company.localFile
+        ? `./logos/${company.localFile}`
+        : null;
 
     return (
         <div className="logo-item-vertical">
@@ -93,12 +93,36 @@ function LogoItem({ company }) {
                     src={logoUrl}
                     alt={company.name}
                     className="company-logo-img"
-                    onError={() => setImgError(true)}
+                    onError={(e) => {
+                        console.error('Image failed to load:', logoUrl);
+                        setImgError(true);
+                        e.target.style.display = 'none';
+                    }}
                     style={{
-                        filter: 'drop-shadow(0 0 5px rgba(255,255,255,0.2))',
-                        maxWidth: '80px',
-                        maxHeight: '40px',
-                        objectFit: 'contain'
+                        // Visual adjustments for dark background
+                        filter: company.manualInvert
+                            ? 'brightness(0) invert(1) drop-shadow(0 0 2px rgba(255,255,255,0.5))'
+                            : company.highContrast
+                                ? 'brightness(0) invert(0.7) sepia(0) saturate(0) drop-shadow(0 0 2px rgba(255,255,255,0.5))' // Silver/Gray like the = mark
+                                : 'drop-shadow(0 0 5px rgba(255,255,255,0.8))', // Standard white glow
+                        maxWidth: company.sizeMultiplier ? `${Math.min(130, 100 * company.sizeMultiplier)}px` : '100px',
+                        maxHeight: company.sizeMultiplier ? `${Math.min(60, 45 * company.sizeMultiplier)}px` : '45px',
+                        width: '100%',
+                        objectFit: 'contain',
+                        opacity: 0.9,
+                        transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.1)';
+                        e.currentTarget.style.filter = company.manualInvert
+                            ? 'brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.8))'
+                            : 'drop-shadow(0 0 8px rgba(255,255,255,1))';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.filter = company.manualInvert
+                            ? 'brightness(0) invert(1) drop-shadow(0 0 2px rgba(255,255,255,0.5))'
+                            : 'drop-shadow(0 0 5px rgba(255,255,255,0.8))';
                     }}
                 />
             ) : (
@@ -228,7 +252,7 @@ function App() {
                         <p className="text-gray-400 mt-2 font-medium">国家戦略6分野 株価トラッカー</p>
                         {nikkeiPrice && (
                             <div className="mt-2 flex items-center gap-3 text-sm font-medium">
-                                <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30 animate-pulse-slow">日経225</span>
+                                <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">日経225</span>
                                 <span className="text-white">¥{nikkeiPrice.toLocaleString()}</span>
                                 <span className={`${nikkeiChange >= 0 ? 'text-red-400' : 'text-green-400'}`}>
                                     (減税報道比: {nikkeiChange > 0 ? '+' : ''}{nikkeiChange?.toFixed(2)}%)

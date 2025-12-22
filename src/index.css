@@ -16,7 +16,7 @@
     position: fixed;
     top: 0;
     bottom: 0;
-    width: 120px;
+    width: 140px;
     overflow: hidden;
     pointer-events: none;
     z-index: 0;
@@ -53,8 +53,9 @@
   }
 
   .company-logo-img {
-    width: 70px;
+    width: 100%;
     height: auto;
+    object-fit: contain;
     opacity: 0.75;
     filter: brightness(1.2);
   }
